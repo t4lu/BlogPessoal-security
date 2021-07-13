@@ -23,10 +23,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Publicacoes {
 	
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY) // equivalente ao "auto_increment" do MySQL.
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NotNull (message = "Você precisa digitar um título")
+	@NotNull (message = "O título é obrigatório.")
 	@Size (min = 5, max = 100)
 	private String titulo;
 	
@@ -37,10 +37,17 @@ public class Publicacoes {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date = new java.util.Date(System.currentTimeMillis());;
 	
+	@PositiveOrZero
+	private int curtidas;
+	
 	@ManyToOne 
-	@JsonIgnoreProperties ("publicacoes") //o comando manytoone vai criar a relacao do tema com os posts
-	private Assunto assunto; //tema
-	//Json evita os loopings da classe Assunto.
+	@JsonIgnoreProperties ("publicacoes")
+	private Assunto assunto;
+	
+	@ManyToOne
+	@JsonIgnoreProperties({"publicacoes", "senha"})
+	private Usuario usuario;
+	
 	
 	public long getId() {
 		return id;
@@ -71,5 +78,18 @@ public class Publicacoes {
 	}
 	public void setAssunto(Assunto assunto) {
 		this.assunto = assunto;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	public int getCurtidas() {
+		return curtidas;
+	}
+	public void setCurtidas(int curtidas) {
+		this.curtidas = curtidas;
 	}
 }

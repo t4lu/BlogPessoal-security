@@ -3,6 +3,7 @@ package br.com.generation.personalBlog.controller;
  * Autora: Talu - Turma 25
  * Data: 06.07.2021
 */
+
 import java.util.List;
 import java.util.Optional;
 
@@ -51,9 +52,9 @@ public class UsuarioController {
 	}
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Usuario> newUsuario(@RequestBody Usuario usuario) {
-		Optional<Usuario> newUsuario = service.inserirUsuario(usuario);
+		Usuario newUsuario = service.cadastrarUsuario(usuario);
 		try {
-				return ResponseEntity.ok(newUsuario.get());
+				return ResponseEntity.ok(newUsuario);
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().build();
 		}

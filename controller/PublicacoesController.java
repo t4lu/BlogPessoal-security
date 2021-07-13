@@ -3,6 +3,7 @@ package br.com.generation.personalBlog.controller;
  * Autora: Talu - Turma 25
  * Data: 06.07.2021
 */
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.generation.personalBlog.model.Publicacoes;
 import br.com.generation.personalBlog.repository.PublicacoesRepository;
+import br.com.generation.personalBlog.service.PublicacoesService;
 
 @RestController
-@RequestMapping ("/posts")
+@RequestMapping ("/publicacoes")
 @CrossOrigin ("*")
 public class PublicacoesController {
 	
 	@Autowired
 	private PublicacoesRepository repositorio;
+	
+	@Autowired
+	private PublicacoesService service;
 	
 	@GetMapping ("/listar")
 	public List<Publicacoes> listar(){
@@ -50,5 +55,13 @@ public class PublicacoesController {
 	@DeleteMapping ("/del/{id}")
 	public Publicacoes deletePublicacao (@PathVariable long id) {
 		return repositorio.deleteById(id);
+	}
+	@PutMapping ("/likes/{id}")
+	public Publicacoes curtir (@PathVariable Long id ) {
+		return service.curtir(id);
+	}
+	@PutMapping ("/dislikes/{id}")
+	public Publicacoes descurtir (@PathVariable Long id ) {
+		return service.descurtir(id);
 	}
 }

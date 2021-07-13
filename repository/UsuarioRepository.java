@@ -14,5 +14,8 @@ import br.com.generation.personalBlog.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	public Optional<Usuario> findByUsuario(String usuario);
-	
+
+	public Optional<Usuario> findByEmail (String email);
+	public Optional<Usuario> findFirstByNomeContainingIgnoreCaseOrderByNome(String nome);
+	public List<Usuario> findAllByNomeContainingIgnoreCase(String nome);
 }
