@@ -1,7 +1,7 @@
 package br.com.generation.personalBlog.service;
-/*Função: Inserindo camada de seguranca no BlogPessoal (testagem no Postman)
+/*Função: Ajustes para o Front-end
  * Autora: Talu - Turma 25
- * Data: 06.07.2021
+ * Data: 29.07.2021
 */
 
 import java.nio.charset.Charset;
@@ -40,8 +40,8 @@ public class UsuarioService {
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
-	 	String senhaEncoder = encoder.encode(usuario.getSenha());//uso o MÉTODO get para extrair a senha do usuario e liberar o acesso
-	 	usuario.setSenha(senhaEncoder);//o ENCODER criptografa a senha e "devolve" para o METODO set
+	 	String senhaEncoder = encoder.encode(usuario.getSenha());
+	 	usuario.setSenha(senhaEncoder);
 	 	
 	 	return (repository.save(usuario));
 	}
@@ -79,19 +79,15 @@ public class UsuarioService {
 				String auth = user.get().getUsuario() + ":" + user.get().getSenha();
 				byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));// getBytes
 																										// transforma
-																										// cada
-																										// caractere em
-																										// binario e
-																										// criptografa a
-																										// senha do
-																										// user.
-				String authHeader = "Basic " + new String(encodedAuth);// isso aqui gera meu token
-				// TEM q ser maiuscula e com espaco
+																					// user.
+				String authHeader = "Basic " + new String(encodedAuth);
+
 				user.get().setToken(authHeader);
 				user.get().setNome(usuario.get().getNome());
-
-				return user;// aqui eu estou convocando TODAS as infos da minha classe userLogin. POREM eu
-							// criei, na linha 51, um objeto user rs.
+				user.get().setId(usuario.get().getId());
+				user.get().setFoto(usuario.get().getFoto());
+				user.get().setTipo(usuario.get().getTipo());
+				return user;
 			}
 		}
 

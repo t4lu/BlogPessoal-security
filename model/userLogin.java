@@ -1,16 +1,25 @@
 package br.com.generation.personalBlog.model;
-/*Função: Inserindo camada de seguranca no BlogPessoal (testagem no Postman)
+/*Função: Ajustes para o Front-end
  * Autora: Talu - Turma 25
- * Data: 06.07.2021
+ * Data: 29.07.2021
 */
+
 public class userLogin {
 	
+	private long id;
 	private String nome;
 	private String usuario;
 	private String senha;
 	private String token;
+	private String foto;
+	private String tipo;
 	
-	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -34,5 +43,17 @@ public class userLogin {
 	}
 	public void setToken(String token) {
 		this.token = token;
+	}
+	public String getFoto() {
+		return foto;
+	}
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 }
